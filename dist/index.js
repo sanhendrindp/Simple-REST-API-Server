@@ -9,12 +9,32 @@ const data_1 = require("./data");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 8000;
-// HTML route for finnancial tracking
+// HTML ROUTE FOR FINNANCIAL TRACKING
+// Get all expenses
 app.get("/expenses", (req, res) => {
-    res.json({
+    res.status(200).json({
         message: "Success get expenses data",
         expenses: data_1.expenses,
     });
+});
+// Get expenses by id
+app.get("/expenses/:id", (req, res) => {
+    const expense = data_1.expenses.filter((item) => item.id == req.params.id);
+    //   res.json({
+    //     message: "Success get expense data by id",
+    //     expense,
+    //   });
+    if (expense.length != 0) {
+        res.json({
+            message: "Success get expense data by id",
+            expense,
+        });
+    }
+    else {
+        res.json({
+            message: "Failed get expense data by id",
+        });
+    }
 });
 // ================================= TESTING =================================
 // Get all

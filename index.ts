@@ -7,12 +7,34 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT || 8000;
 
-// HTML route for finnancial tracking
+// HTTP ROUTE FOR FINNANCIAL TRACKING
+// Get all expenses
 app.get("/expenses", (req: Request, res: Response) => {
-  res.json({
+  res.status(200).json({
     message: "Success get expenses data",
     expenses,
   });
+});
+
+// Get expenses by id
+app.get("/expenses/:id", (req: Request, res: Response) => {
+  const expense = expenses.filter((item: any) => item.id == req.params.id);
+
+  //   res.json({
+  //     message: "Success get expense data by id",
+  //     expense,
+  //   });
+
+  if (expense.length != 0) {
+    res.json({
+      message: "Success get expense data by id",
+      expense,
+    });
+  } else {
+    res.json({
+      message: "Failed get expense data by id",
+    });
+  }
 });
 
 // ================================= TESTING =================================
