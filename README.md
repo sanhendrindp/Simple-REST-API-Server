@@ -11,3 +11,5 @@ Langkah -langkah :
    ```
    "outDir": "./dist"
    ```
+7. Install nodemon: npm i -D nodemon
+8. Instal concurrently: npm i -D concurrently

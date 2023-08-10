@@ -7,8 +7,8 @@ const app: Express = express();
 const port = process.env.PORT || 8000;
 
 // Get all
-app.get("/", (req, res) => {
-  res.send("halo dunia ini saya");
+app.get("/", (req: Request, res: Response) => {
+  res.send(`Server connected in port: ${port}`);
 });
 
 // Server listen to port
