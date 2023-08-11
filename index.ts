@@ -70,6 +70,26 @@ app.put("/expenses/:id", (req: Request, res: Response) => {
   }
 });
 
+// PATCH: to partially update an existing data with given id
+app.patch("/expenses/:id", (req: Request, res: Response) => {
+  const idToUpdate = parseInt(req.params.id);
+  const updatePartial = req.body;
+
+  const index = expenses.findIndex((expense) => expense.id === idToUpdate);
+
+  if (index !== -1) {
+    expenses[index] = { ...expenses[index], ...updatePartial };
+    res.json({
+      message: "Success updating expense data ✅",
+      updatedExpense: expenses[index],
+    });
+  } else {
+    res.status(404).json({
+      message: "Expense not found for update 😥",
+    });
+  }
+});
+
 // DELETE: to delete existing data with given id
 app.delete("/expenses/:id", (req: Request, res: Response) => {
   const idToDelete = parseInt(req.params.id);
