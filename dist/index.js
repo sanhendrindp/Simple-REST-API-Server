@@ -64,6 +64,22 @@ app.put("/expenses/:id", (req, res) => {
     }
 });
 // DELETE: to delete existing data with given id
+app.delete("/expenses/:id", (req, res) => {
+    const idToDelete = parseInt(req.params.id);
+    const index = data_1.expenses.findIndex((expense) => expense.id === idToDelete);
+    if (index !== -1) {
+        const deletedExpense = data_1.expenses.splice(index, 1)[0];
+        res.json({
+            message: "Success deleting expense data ✅",
+            deletedExpense,
+        });
+    }
+    else {
+        res.status(404).json({
+            message: "Expense not found for deletion 😥",
+        });
+    }
+});
 // ================================= TESTING =================================
 // Get all
 app.get("/", (req, res) => {
