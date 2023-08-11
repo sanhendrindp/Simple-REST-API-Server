@@ -5,11 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const body_parser_1 = __importDefault(require("body-parser"));
 const data_1 = require("./data");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 8000;
-// HTML ROUTE FOR FINNANCIAL TRACKING
+app.use(body_parser_1.default.json());
+// ========================= HTTP ROUTE FOR FINNANCIAL TRACKING =======================
 // Get all expenses
 app.get("/expenses", (req, res) => {
     res.status(200).json({
@@ -20,46 +22,33 @@ app.get("/expenses", (req, res) => {
 // Get expenses by id
 app.get("/expenses/:id", (req, res) => {
     const expense = data_1.expenses.filter((item) => item.id == req.params.id);
-    //   res.json({
-    //     message: "Success get expense data by id",
-    //     expense,
-    //   });
     if (expense.length != 0) {
         res.json({
-            message: "Success get expense data by id",
+            message: "Success get expense data by id ✅",
             expense,
         });
     }
     else {
         res.json({
-            message: "Failed get expense data by id",
+            message: "Failed get expense data by id ❌",
         });
     }
+});
+// Post new expense data
+app.post("/expenses", (req, res) => {
+    // console.log(req.body);
+    // Push new data to expenses array
+    data_1.expenses.push(req.body);
+    // console.log(expenses);
+    res.json({
+        message: "Success adding new expense data ✅",
+        expenses: data_1.expenses,
+    });
 });
 // ================================= TESTING =================================
 // Get all
 app.get("/", (req, res) => {
-    res.send(`Server connected in port: ${port}`);
-});
-// Get route Testing
-app.get("/testing", (req, res) => {
-    res.send(`This is route testing`);
-});
-// Get route with parameter using Testing route
-app.get("/testing/:name", (req, res) => {
-    res.send(`This is route testing, my name is ${req.params.name}`);
-});
-// Post
-app.post("/", (req, res) => {
-    res.send(`Test post`);
-});
-// Put
-app.put("/testing", (req, res) => {
-    res.send(`Test put`);
-});
-// Patch
-app.patch("/testing", (req, res) => {
-    res.send(`Tes patch`);
+    res.send(`Welcome to Financial Tracking app! Try /expenses to get the data. 💡`);
 });
 // Server listen to port
 app.listen(port, () => {
