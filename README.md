@@ -49,15 +49,11 @@ npm i body-parser
 npm i -D @types/body-parser
 ```
 
-After all dependencies already install to the project, generating tsconfig.json using **npx tsc --init** , then change outDir in tsconfig.json as:
-
-```
-"outDir": "./dist"
-```
-
 7. Update the script in **package.json**:
 <p align="center">
     <img src="images/packageJSON.PNG">
 </p>
+
+After all dependencies already installed to the project, generating tsconfig.json using **npx tsc --init** , then change outDir in tsconfig.json as: **"outDir": "./dist"**
 
 <!-- # Install Postman & test APIs -->
