@@ -1,17 +1,63 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/sRKW9Tsr)
+![Banner](images/Build%20REST%20API%20Server.png)
 
-Langkah -langkah :
+<h5 align="center">Website Link</h5>
+<p align="center">
+<a href="https://sanhendrindp.site/">sanhendrindp.site</a>
+</p>
 
-1. Make node.js project: npm init -y
-2. Install express.js & dotenv package: npm i express dotenv
-3. Install Typescript, @types/express, & @types/node package: npm i -D typescript @types/express @types/node
-4. Generating tsconfig.json: npx tsc --init
-5. Make index.ts file that contain our server code
-6. In tsconfig.json, make new folder call dist, by uncomment outDir.
-   ```
-   "outDir": "./dist"
-   ```
-7. Install nodemon: npm i -D nodemon
-8. Instal concurrently: npm i -D concurrently
-9. Install body-parser: npm i body-parser
-10. Install @types/body-parser: npm i -D @types/body-parser
+# Project Description
+
+In week 7, a Financial Tracking app was already created. Now in week 8, we are trying to create a simple REST API server based on the Financial Tracking, so user can perform basic CRUD operations on the provided data.
+
+# Preparation
+
+To create this project, we want to install depedencies that we need for this project. First, we need to create Node.js project by using **npm init** in terminal. After that, install the dependecies, such as :
+
+1. express.js and dotenv package:
+
+```
+npm i express dotenv
+```
+
+2. Install Typescript, @types/express, and @types/node package:
+
+```
+npm i -D typescript @types/express @types/node
+```
+
+3. Install nodemon as devDependencies:
+
+```
+npm i -D nodemon
+```
+
+4. Install concurrently as devDependencies:
+
+```
+npm i -D concurrently
+```
+
+5. Install body-parser:
+
+```
+npm i body-parser
+```
+
+6. Install @types/body-parser as devDependencies:
+
+```
+npm i -D @types/body-parser
+```
+
+After all dependencies already install to the project, generating tsconfig.json using **npx tsc --init** , then change outDir in tsconfig.json as:
+
+```
+"outDir": "./dist"
+```
+
+7. Update the script in **package.json**:
+<p align="center">
+    <img src="images/packageJSON.PNG">
+</p>
+
+<!-- # Install Postman & test APIs -->
