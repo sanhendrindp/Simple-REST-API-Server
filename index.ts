@@ -7,7 +7,7 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT || 8000;
 
-// HTTP ROUTE FOR FINNANCIAL TRACKING
+// ========================= HTTP ROUTE FOR FINNANCIAL TRACKING =======================
 // Get all expenses
 app.get("/expenses", (req: Request, res: Response) => {
   res.status(200).json({
@@ -19,11 +19,6 @@ app.get("/expenses", (req: Request, res: Response) => {
 // Get expenses by id
 app.get("/expenses/:id", (req: Request, res: Response) => {
   const expense = expenses.filter((item: any) => item.id == req.params.id);
-
-  //   res.json({
-  //     message: "Success get expense data by id",
-  //     expense,
-  //   });
 
   if (expense.length != 0) {
     res.json({

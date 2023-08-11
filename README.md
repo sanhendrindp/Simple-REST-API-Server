@@ -13,3 +13,5 @@ Langkah -langkah :
    ```
 7. Install nodemon: npm i -D nodemon
 8. Instal concurrently: npm i -D concurrently
+9. Install body-parser: npm i body-parser
+10. Install @types/body-parser: npm i -D @types/body-parser
