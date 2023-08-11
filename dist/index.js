@@ -12,14 +12,14 @@ const app = (0, express_1.default)();
 const port = process.env.PORT || 8000;
 app.use(body_parser_1.default.json());
 // ========================= HTTP ROUTE FOR FINNANCIAL TRACKING =======================
-// Get all expenses
+// GET: to get all expenses data
 app.get("/expenses", (req, res) => {
     res.status(200).json({
-        message: "Success get expenses data",
+        message: "Success get expenses data ✅",
         expenses: data_1.expenses,
     });
 });
-// Get expenses by id
+// GET by id: to get expense data by id
 app.get("/expenses/:id", (req, res) => {
     const expense = data_1.expenses.filter((item) => item.id == req.params.id);
     if (expense.length != 0) {
@@ -30,11 +30,11 @@ app.get("/expenses/:id", (req, res) => {
     }
     else {
         res.json({
-            message: "Failed get expense data by id ❌",
+            message: "Failed get expense data by id 😥",
         });
     }
 });
-// Post new expense data
+// POST: to add new expense data
 app.post("/expenses", (req, res) => {
     // console.log(req.body);
     // Push new data to expenses array
@@ -45,6 +45,25 @@ app.post("/expenses", (req, res) => {
         expenses: data_1.expenses,
     });
 });
+// PUT: to updates existing data with given id
+app.put("/expenses/:id", (req, res) => {
+    const idToUpdate = parseInt(req.params.id);
+    const updatedExpense = req.body;
+    const index = data_1.expenses.findIndex((expense) => expense.id === idToUpdate);
+    if (index !== -1) {
+        data_1.expenses[index] = Object.assign(Object.assign({}, data_1.expenses[index]), updatedExpense);
+        res.json({
+            message: "Success updating expense data ✅",
+            updatedExpense: data_1.expenses[index],
+        });
+    }
+    else {
+        res.status(404).json({
+            message: "Expense not found for update 😥",
+        });
+    }
+});
+// DELETE: to delete existing data with given id
 // ================================= TESTING =================================
 // Get all
 app.get("/", (req, res) => {

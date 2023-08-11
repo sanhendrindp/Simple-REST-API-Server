@@ -11,15 +11,16 @@ const port = process.env.PORT || 8000;
 app.use(bodyParser.json());
 
 // ========================= HTTP ROUTE FOR FINNANCIAL TRACKING =======================
-// Get all expenses
+
+// GET: to get all expenses data
 app.get("/expenses", (req: Request, res: Response) => {
   res.status(200).json({
-    message: "Success get expenses data",
+    message: "Success get expenses data ✅",
     expenses,
   });
 });
 
-// Get expenses by id
+// GET by id: to get expense data by id
 app.get("/expenses/:id", (req: Request, res: Response) => {
   const expense = expenses.filter((item: any) => item.id == req.params.id);
 
@@ -30,12 +31,12 @@ app.get("/expenses/:id", (req: Request, res: Response) => {
     });
   } else {
     res.json({
-      message: "Failed get expense data by id ❌",
+      message: "Failed get expense data by id 😥",
     });
   }
 });
 
-// Post new expense data
+// POST: to add new expense data
 app.post("/expenses", (req: Request, res: Response) => {
   // console.log(req.body);
 
@@ -48,6 +49,28 @@ app.post("/expenses", (req: Request, res: Response) => {
     expenses,
   });
 });
+
+// PUT: to updates existing data with given id
+app.put("/expenses/:id", (req: Request, res: Response) => {
+  const idToUpdate = parseInt(req.params.id);
+  const updatedExpense = req.body;
+
+  const index = expenses.findIndex((expense) => expense.id === idToUpdate);
+
+  if (index !== -1) {
+    expenses[index] = { ...expenses[index], ...updatedExpense };
+    res.json({
+      message: "Success updating expense data ✅",
+      updatedExpense: expenses[index],
+    });
+  } else {
+    res.status(404).json({
+      message: "Expense not found for update 😥",
+    });
+  }
+});
+
+// DELETE: to delete existing data with given id
 
 // ================================= TESTING =================================
 
