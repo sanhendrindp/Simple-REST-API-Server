@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const body_parser_1 = __importDefault(require("body-parser"));
-const data_1 = require("./data");
+const data_1 = require("./data"); // Import the Expense interface too
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 8000;
@@ -21,7 +21,8 @@ app.get("/expenses", (req, res) => {
 });
 // GET by id: to get expense data by id
 app.get("/expenses/:id", (req, res) => {
-    const expense = data_1.expenses.filter((item) => item.id == req.params.id);
+    const expenseId = parseInt(req.params.id); // Parse id as a number, so we will not use item: any
+    const expense = data_1.expenses.filter((item) => item.id === expenseId);
     if (expense.length != 0) {
         res.json({
             message: "Success get expense data by id ✅",
@@ -29,7 +30,7 @@ app.get("/expenses/:id", (req, res) => {
         });
     }
     else {
-        res.json({
+        res.status(404).json({
             message: "Failed get expense data by id 😥",
         });
     }

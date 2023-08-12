@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
-import { expenses } from "./data";
+import { expenses, Expense } from "./data"; // Import the Expense interface too
 
 dotenv.config();
 
@@ -22,7 +22,9 @@ app.get("/expenses", (req: Request, res: Response) => {
 
 // GET by id: to get expense data by id
 app.get("/expenses/:id", (req: Request, res: Response) => {
-  const expense = expenses.filter((item: any) => item.id == req.params.id);
+  const expenseId: number = parseInt(req.params.id); // Parse id as a number, so we will not use item: any
+
+  const expense = expenses.filter((item: Expense) => item.id === expenseId);
 
   if (expense.length != 0) {
     res.json({
@@ -30,7 +32,7 @@ app.get("/expenses/:id", (req: Request, res: Response) => {
       expense,
     });
   } else {
-    res.json({
+    res.status(404).json({
       message: "Failed get expense data by id 😥",
     });
   }

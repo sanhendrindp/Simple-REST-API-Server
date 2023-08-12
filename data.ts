@@ -1,5 +1,5 @@
 // ====================== Data for Financial Tracking =========================
-interface Expense {
+export interface Expense {
   id: number;
   category: string;
   date: string;
