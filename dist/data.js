@@ -14,4 +14,10 @@ exports.expenses = [
         date: "2023-08-07",
         amount: 50000,
     },
+    {
+        id: 3,
+        category: "Apartement Cost",
+        date: "2023-08-17",
+        amount: 1600000,
+    },
 ];
